@@ -1,0 +1,34 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "A CLI app for managing a company's employees using node, inquirer, and MySQL.",
+  "main": "empTracker.js",
+  "scripts": {
+    "test": "n/a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjaesj/Employee-Tracker.git"
+  },
+  "keywords": [
+    "employee",
+    "tracker",
+    "management",
+    "database",
+    "salary",
+    "budget"
+  ],
+  "author": "Rj San Jose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arjaesj/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/arjaesj/Employee-Tracker#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1",
+    "npm": "^6.14.7"
+  }
+}
