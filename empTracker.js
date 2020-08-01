@@ -81,12 +81,12 @@ function init() {
                 case "Delete Employee":
                     deleteEmployee();
                     break;
-                    // case "Delete Job Title/Role":
-                    //     deleteRole();
-                    //     break;
-                    // case "Delete Department":
-                    //     deleteDepartment();
-                    //     break;
+                case "Delete Job Title/Role":
+                    deleteRole();
+                    break;
+                case "Delete Department":
+                    deleteDepartment();
+                    break;
                 case "Quit":
                     quitApp();
                     break;
@@ -399,7 +399,7 @@ const updateRole = () => {
                 type: "rawlist",
                 message: "Please choose Employee whose role you would like to update?",
                 choices: () => {
-                    const nameArray = response.map(employee => employee.first_name);
+                    let nameArray = response.map(employee => employee.first_name);
                     return nameArray;
                 }
             },
@@ -408,7 +408,7 @@ const updateRole = () => {
                 type: "rawlist",
                 message: "Please choose the new role of your Employee.",
                 choices: () => {
-                    const rolesArray = response.reduce((accumulator, role) => {
+                    let rolesArray = response.reduce((accumulator, role) => {
                         accumulator[role.title_role] = 1;
                         return accumulator;
                     }, {});
@@ -448,7 +448,7 @@ const deleteEmployee = () => {
             type: "rawlist",
             message: "Please choose Employee you want to remove.",
             choices: () => {
-                const nameArray = response.map(employee => employee.first_name);
+                let nameArray = response.map(employee => employee.first_name);
                 return nameArray;
             }
         }, ]).then(answer => {
@@ -457,74 +457,67 @@ const deleteEmployee = () => {
                 },
                 error => {
                     if (error) throw error
-                    console.log("Employee deleted successfuly.")
                     viewEmployees();
-                });
+                    console.log("\n Employee deleted successfuly.")
+                }
+            );
         });
     });
 };
 
 // function for deleting the roles, error: cannot delete a role with a child in it
-let deleteRole = () => {
-    connection.query("SELECT * FROM role", function(error, response) {
+const deleteRole = () => {
+    connection.query("SELECT title_role FROM employee_role", (error, response) => {
         if (error) throw error
         inquirer.prompt([{
             name: "chooseRole",
             type: "rawlist",
-            message: "please choose which role you would like to update to?",
+            message: "Please choose the Title/Role you like to remove.",
             choices: () => {
-                const rolesArr = [];
-                for (let i = 0; i < response.length; i++) {
-                    rolesArr.push(response[i].title)
-
-                }
-                return rolesArr;
+                let rolesArray = response.map(role => role.title_role);
+                return rolesArray;
             }
         }, ]).then(answer => {
-            connection.query("DELETE FROM role WHERE ?", {
-                    title: answer.chooseRole
+            connection.query("DELETE FROM employee_role WHERE ?", {
+                    title_role: answer.chooseRole
                 },
 
                 error => {
                     if (error) throw error
-                    console.log("Tile/Role deleted successfuly.")
                     viewRoles();
+                    console.log("\n Tile/Role deleted successfuly.");
                 }
-            )
-        })
-    })
+            );
+        });
+    });
 };
 
-// //for deleting the departments
-// let deleteDepartment = () => {
-//     connection.query("SELECT * FROM department", function(error, response) {
-//         if (error) throw error
-//         inquirer.prompt([{
-//             name: "chooseDep",
-//             type: "rawlist",
-//             message: "please choose which role you would like to update to?",
-//             choices: function() {
-//                 const rolesArr = [];
-//                 for (let i = 0; i < response.length; i++) {
-//                     rolesArr.push(response[i].name)
+//function for deleting the departments
+const deleteDepartment = () => {
+    connection.query("SELECT * FROM department", (error, response) => {
+        if (error) throw error
+        inquirer.prompt([{
+            name: "chooseDepartment",
+            type: "rawlist",
+            message: "Please choose the Department name you like to remove.",
+            choices: () => {
+                let departmentsArray = response.map(departmentName => departmentName.department_name);
+                return departmentsArray;
+            }
+        }, ]).then(function(answer) {
+            connection.query("DELETE FROM department WHERE ?", {
+                    department_name: answer.chooseDepartment
+                },
 
-//                 }
-//                 return rolesArr;
-//             }
-//         }, ]).then(function(answer) {
-//             connection.query("DELETE FROM department WHERE ?", {
-//                     name: answer.chooseDep
-//                 },
-
-//                 function(error) {
-//                     if (error) throw error
-//                     viewDepartments()
-//                 }
-
-//             )
-//         })
-//     })
-// }
+                function(error) {
+                    if (error) throw error;
+                    viewDepartments();
+                    console.log("\n Office Department deleted successfuly.");
+                }
+            );
+        });
+    });
+};
 
 // function to quit app but also added "Go Back" option in case the user did not mean to select quit
 let quitApp = () => {
