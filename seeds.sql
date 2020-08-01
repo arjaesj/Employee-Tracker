@@ -1,24 +1,25 @@
 USE employee_tracker_db;
 
-INSERT INTO department (name) VALUES ("Engineering");
-INSERT INTO department (name) VALUES ("Marketing");
-INSERT INTO department (name) VALUES ("Legal");
-INSERT INTO department (name) VALUES ("Finance");
+INSERT INTO department (department_name) VALUES ("Drafting");
+INSERT INTO department (department_name) VALUES ("Administration");
+INSERT INTO department (department_name) VALUES ("Sales");
+INSERT INTO department (department_name) VALUES ("R&D");
+INSERT INTO department (department_name) VALUES ("Management");
 
-INSERT INTO role (title, salary, department_id) VALUES ("Engineering Lead", 160, 1);
-INSERT INTO role (title, salary, department_id) VALUES ("Engineer", 100, 1);
-INSERT INTO role (title, salary, department_id) VALUES ("Sales Lead", 100, 2);
-INSERT INTO role (title, salary, department_id) VALUES ("Salesperson", 45, 2);
-INSERT INTO role (title, salary, department_id) VALUES ("Legal Team Lead", 160, 3);
-INSERT INTO role (title, salary, department_id) VALUES ("Lawyer", 150, 3);
-INSERT INTO role (title, salary, department_id) VALUES ("Finance Team Lead", 100, 4);
-INSERT INTO role (title, salary, department_id) VALUES ("Accountant", 70, 4);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Architectural Draftsperson", 65000, 1);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Client Administrator", 65000, 2);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Group Display Home Coordinator", 70000, 2);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Sales Consultant", 75000, 3);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Senior Architectural Designer", 90000, 4);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Design & Drafting Manager", 95000, 5);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Sales Manager", 95000, 5);
+INSERT INTO employee_role (title_role, salary, department_id) VALUES ("Administration Manager", 95000, 5);
 
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Griffin", "Jones", 1, null);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("James", "Jones", 2, 1);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Tyler", "Nigro", 3, null);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Amanda", "Fyle", 4, 3);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Ethan", "Lewis", 5, null);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Andrew", "Skorupa", 6, 5);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Zach", "Crump", 7, null);
-INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Thomas", "Gryb", 8, 7);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Rocco", "San Jose", 1, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Ethan", "San Jose", 1, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Mara", "San Jose", 2, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Jessica", "Armstrong", 3, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Romano", "Fernandes", 4, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Rj", "San Jose", 5, null);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Meg", "San Jose", 6, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Stuart", "Brown", 8, 2);
